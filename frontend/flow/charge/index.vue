@@ -7,7 +7,7 @@
             <v-list-item-content>
               <Environment />
               <v-list-item-title class="headline mb-1">
-               Settle Up!
+               HELLOO
               </v-list-item-title>
             </v-list-item-content>
             <v-menu v-if="!showPaymentStatus">
@@ -171,7 +171,38 @@
           </v-card-text>
         </v-card>
       </v-col>
-      
+      <v-col cols="12" md="5">
+        <div class="pa-4">
+          <h1 class="headline">Charge a card - One-off payment</h1>
+
+          <p class="mt-6">
+            To accept a card payment using the Circle Payments API you need to
+            collect card details and billing information from the end user
+            similar to the payments form shown on the left.
+          </p>
+          <p>
+            If you are accepting a one-off payment (that is, your product does
+            not need to support accepting multiple future payments for this
+            card), then you don't need so store the card id as a reference to
+            this end -user's card when creating the card.
+          </p>
+          <p>
+            For implementation details please see our
+            <a
+              href="https://developers.circle.com/docs/accept-card-payments-online"
+              rel="noopener"
+              target="_blank"
+            >
+              API guide.
+            </a>
+          </p>
+          <p class="subtitle-2">
+            You can test the form by entering your personal api key in the
+            settings on the right (Caution: When using a production api key it
+            will charge your card).
+          </p>
+        </div>
+      </v-col>
     </v-row>
     <ErrorSheet
       :error="error"
