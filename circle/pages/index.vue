@@ -5,14 +5,14 @@
       <!-- Add an Expense Section -->
       <v-card class="body-1 px-6 py-8 mb-4" max-width="800" outlined>
         <h1 class="headline">Add an Expense</h1>
-        <v-form class="mt-6" ref="form">
+        <v-form class="mt-6" ref="form" @submit.prevent="submitExpense">
           <v-text-field label="Description" v-model="description" required></v-text-field>
           <v-text-field label="Price" v-model="price" type="number" prefix="$" required></v-text-field>
           <v-combobox label="Currency" v-model="currency" :items="currencies" required></v-combobox>
           <v-select label="Paid by" v-model="paidBy" :items="users" required></v-select>
           <v-select label="For" v-model="selectedUsers" :items="users" multiple required></v-select>
 
-          <v-btn color="primary" @click="addExpense">Submit Expense</v-btn>
+          <v-btn color="primary" @click="submitExpense">Submit Expense</v-btn>
         </v-form>
       </v-card>
 
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -58,7 +60,23 @@ export default {
     };
   },
   methods: {
-    addExpense() {
+    submitExpense() {
+      const data = {
+        price: this.price,
+        currency: this.currency,
+        description: this.description,
+      };
+
+      axios.post('/api/addExpense', data)
+        .then((response) => {
+          console.log('Server response:', response.data);
+        })
+        .catch((error) => {
+          console.error('There was an error:', error.response);
+        });
+    },
+
+    splitExpense() {
       if (!this.price || this.selectedUsers.length === 0) {
         alert('Please input the price and select users.');
         return;
