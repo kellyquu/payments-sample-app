@@ -52,7 +52,7 @@ export default {
       currency: '',
       paidBy: '',
       selectedUsers: [],
-      users: ['User1', 'User2', 'User3'],
+      users: ['Carolyn', 'Kelly', 'Joanne'],
       currencies: ['CAD', 'EUR', 'GBP', 'JPY', 'USD', 'AUD'],
       expenses: []
     };
