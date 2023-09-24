@@ -11,7 +11,7 @@ var corsOptions = {
   };
   
   app.use(cors(corsOptions));
-  
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static("public"));
@@ -24,11 +24,13 @@ app.listen(process.env.PORT || 5001, () => {
 
 // Connect to Mongoose DB
 mongoose.connect("mongodb://127.0.0.1:27017/technovaDB");
+// mongodb+srv://carolynzhang18:<password>@cluster0.24deo4w.mongodb.net/?retryWrites=true&w=majority
 
 // Expense collection
 const expenseSchema = {
     price: Number,
     currency: String,
+    description: String.
     date: String,
     buyer: mongoose.ObjectId
 };
@@ -72,13 +74,14 @@ app.post("/addUser", function(req, res) {
 });
 
 app.post("/api/addExpense", function(req, res) {
-    console.log("saa");
+    // console.log("saa");
     const price = req.body.price;
     const currency = req.body.currency;
     const today = new Date().toLocaleDateString("fr-CA", {timeZone: "America/Toronto"});
     const newExpense = new expense ({
         price: price,
         currency: currency,
+        description: description,
         date: today,
         buyer: "650fa19faa05a5f6aff8b408"
     });
