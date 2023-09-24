@@ -1,9 +1,17 @@
 const express = require("express");
+const cors = require('cors');
 const https = require("https");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const app = express();
+
+var corsOptions = {
+    origin: "http://10.120.3.154:3011/"
+  };
+  
+  app.use(cors(corsOptions));
+  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static("public"));
@@ -21,7 +29,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/technovaDB");
 const expenseSchema = {
     price: Number,
     currency: String,
-    date: Date
+    date: String,
+    buyer: mongoose.ObjectId
 };
 const expense = mongoose.model("expense", expenseSchema);
 
@@ -45,7 +54,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/users", function(req, res) {
-
+    res.sendFile(__dirname + "/../circle/pages/index.vue");
 })
 
 app.post("/addUser", function(req, res) {
@@ -62,14 +71,20 @@ app.post("/addUser", function(req, res) {
     res.sendFile(__dirname + "/testing/expense.html");
 });
 
-app.post("/addExpense", function(req, res) {
+app.post("/api/addExpense", function(req, res) {
+    console.log("saa");
     const price = req.body.price;
     const currency = req.body.currency;
     const today = new Date().toLocaleDateString("fr-CA", {timeZone: "America/Toronto"});
     const newExpense = new expense ({
         price: price,
         currency: currency,
-        date: today
+        date: today,
+        buyer: "650fa19faa05a5f6aff8b408"
     });
-    
+    newExpense.save();
+})
+
+app.get("/expenses", function(req, res) {
+    res.sendFile(__dirname + "/testing/expense.html");
 })
