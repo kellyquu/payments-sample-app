@@ -13,7 +13,7 @@
             <v-list-item-title> Add Expenses </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
+
         <!-- Direct link to 'Charge a card' -->
         <v-list-item to="/flow/charge" router exact>
           <v-list-item-content>
@@ -25,6 +25,7 @@
 
     <v-app-bar clipped-left fixed app dark color="primary" dense>
       <v-app-bar-nav-icon @click.stop="showDrawer = !showDrawer" />
+      <img src="./cowlogo.png" style="width: 50px" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon @click.stop="showRightDrawer = !showRightDrawer">
