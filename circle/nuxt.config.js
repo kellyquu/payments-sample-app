@@ -23,7 +23,10 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap' } // Add this line for Roboto Slab font
+    ],
     script: [
       {
         src: 'https://pay.google.com/gp/p/js/pay.js',
@@ -93,12 +96,22 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
-  vuetify: {
+   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
+      dark: true,  // <-- Enables dark mode
       themes: {
-        light: {
-          primary: colors.teal.lighten1,
+        dark: {  // <-- Define color palette for dark theme
+          primary: colors.blue.darken3,
+          accent: colors.cyan.darken3,
+          secondary: colors.teal.darken3,
+          info: colors.teal.darken1,
+          warning: colors.amber.darken1,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent4,
+        },
+        light: {  // <-- You can still retain the light theme if needed
+          primary: colors.indigo.lighten1,
           accent: colors.cyan.lighten1,
           secondary: colors.teal.lighten3,
           info: colors.teal.lighten3,
@@ -107,6 +120,7 @@ export default {
           success: colors.green.accent3,
         },
       },
+      
     },
   },
   /*

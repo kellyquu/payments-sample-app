@@ -10,7 +10,7 @@
       <v-list>
         <v-list-item to="/" router exact>
           <v-list-item-content>
-            <v-list-item-title> Home </v-list-item-title>
+            <v-list-item-title> Add Expenses </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         
