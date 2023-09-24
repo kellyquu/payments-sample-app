@@ -25,11 +25,24 @@
             :items="currencies"
             required
           ></v-combobox>
-          
-          <v-btn color="primary" @click="submitExpense">Submit Expense</v-btn>
-        </v-form>
 
-        <p class="font-weight-bold mt-8">Paid by you and split equally</p>
+          <v-select
+            label="Paid by"
+            v-model="paidBy"
+            :items="users"
+            required
+          ></v-select>
+
+          <v-select
+            label="For"
+            v-model="selectedUsers"
+            :items="users"
+            multiple
+            required
+          ></v-select>
+
+          <v-btn color="primary" @click="splitExpense">Split Equally</v-btn>
+        </v-form>
       </v-card>
 
       <v-card class="body-1 px-6 py-8 mb-4" max-width="800" outlined>
@@ -51,16 +64,21 @@ export default {
       description: '',
       price: '',
       currency: '',
-      currencies: ['CAD', 'EUR', 'GBP', 'JPY', 'USD', 'AUD'] // Add more as needed
+      paidBy: '',
+      selectedUsers: [],
+      users: ['User1', 'User2', 'User3'],
+      currencies: ['CAD', 'EUR', 'GBP', 'JPY', 'USD', 'AUD']
     };
   },
   methods: {
-    async submitExpense() {
-      if (this.$refs.form.validate()) {
-        // Handle the submission logic here. For example:
-        // await apiCallToAddExpense(this.description, this.price, this.currency);
-        console.log('Expense submitted:', this.description, this.price, this.currency);
+    splitExpense() {
+      if (!this.price || this.selectedUsers.length === 0) {
+        alert('Please input the price and select users.');
+        return;
       }
+
+      const splitAmount = (parseFloat(this.price) / this.selectedUsers.length).toFixed(2);
+      alert(`Each user owes: $${splitAmount}`);
     }
   }
 };
