@@ -12,8 +12,26 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.listen(process.env.PORT || 5001);
 
 // Connect to Mongoose DB
-mongoose.connect("mongodb://127.0.0.1:27017/");
+mongoose.connect("mongodb://127.0.0.1:27017/technovaDB");
 
-// Connect to Circle
-require("./circle.js")(app);
+// Expense collection
+const expenseSchema = {
+    value: Number,
+    date: Date
+};
+const expense = mongoose.model("expense", expenseSchema);
 
+// People collection
+const personSchema = {
+    fname: {
+        type: String,
+        required: true
+    },
+    lname: {
+        type: String,
+        required: true
+    },
+    groups: [Number],
+    expenses: [expenseSchema]
+};
+const person = mongoose.model("person", personSchema);
